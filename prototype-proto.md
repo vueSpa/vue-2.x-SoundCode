@@ -186,4 +186,50 @@ console.log(b)
     所以 为了让 整个 程序结构看上去 合理。 我们需要   把 新建 对象的 原型 指向 构造函数的 prototype 属性。
 
 
+
+`
+所以到最后，我们 总结一下 。 
+
+在 javascript 中 prototype 和 __proto__ 到底有什么区别。
+
+prototype 是 面向 构造函数，来思考，
+__proto__ 是 面向 实例化 后 的对象 来思考就对了。 
+
+`
+
+`
+最后再 给一个例子，
+是一个，我们经常会在开发中用到的 例子。
+`
+
+```javascript
+var Person = function(){}
+Person.prototype.sayName = function() {
+    alert('my name is xxx')
+}
+
+Person.prototype.age = 12
+
+var p = new Person()
+
+p.sayName()
+
+// 当我们 实例化 之后， 在我们 去执行 p.sayName() 的 时候，我们就会去 this 内部去 查找（这里就是 构造函数 Person 内部去找。 可是 没找到啊。只是一个 空函数， 怎么办呢？）
+
+// 这个时候 就会沿着 原型链向上追溯， 但是如何 追溯呢？
+
+// 这里就要用到 __proto__ 属性 来作为 追溯的 桥梁。
+
+// 因为 实例化对象的 __proto__ 属性 指向的就是 构造函数的  prototype 属性所对应的 对象啊
+
+```
+
+
+![](http://images2015.cnblogs.com/blog/675289/201703/675289-20170311172017998-131500932.png)
+
+
+最后 终于 愉快的 找到了，自己的对象啦~ 单身狗就可能一直找不到，或者看不懂这篇文章。
+
+
+
 好了，以上就是 在 看 vuejs 源码 的时候 关于 new 的 一个 知识 扩展。
