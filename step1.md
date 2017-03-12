@@ -34,18 +34,67 @@ JS 知识扩展
 2. 将这个新对象的 __proto__ 指向 构造函数的 prototype 成员对象
 3. 将 构造函数的 this 指针 指向 这个新创建的对象
 
+具体的文档
 
-![](http://images2015.cnblogs.com/blog/675289/201703/675289-20170311123155623-1660235069.png)
+[关于 new 的相关介绍](https://github.com/vueSpa/vue-2.x-SoundCode/blob/master/prototype-proto.md)
+
+
+然后，我们需要思考的问题来了。
+
+去哪里找到 vue 实例化的 构造函数呢？
+
+嗯，最后还是找到了。
+
+[vue 实例化构造函数](https://github.com/vuejs/vue/blob/dev/src/core/instance/index.js)
+
+就是我们当前 该项目的 vue 文件夹下 core ／ instance ／ index.js
 
 `
-这张图，其实也不是很好理解，下面我们讲 拿出一个具体的例子来讲讲这个图上 具体是说了什么
+好，我们打开这个文件 看看里面具体是 什么
 `
 
-具体是， 不明白的，可以看 文档
+```javascript
+import { initMixin } from './init'
+import { stateMixin } from './state'
+import { renderMixin } from './render'
+import { eventsMixin } from './events'
+import { lifecycleMixin } from './lifecycle'
+import { warn } from '../util/index'
 
+function Vue (options) {
+  if (process.env.NODE_ENV !== 'production' &&
+    !(this instanceof Vue)) {
+    warn('Vue is a constructor and should be called with the `new` keyword')
+  }
+  this._init(options)
+}
 
+initMixin(Vue)
+stateMixin(Vue)
+eventsMixin(Vue)
+lifecycleMixin(Vue)
+renderMixin(Vue)
 
+export default Vue
+```
 
+看着这个代码觉得还ok，但是，在你查找 init 方法的时候，你会发现
+
+```javascript
+Vue.prototype._init = function (options?: Object) {
+    const vm: Component = this
+    // a uid
+    vm._uid = uid++
+    // ...
+```
+
+这是什么 js 代码啊？
+
+原来一看， 这里写的 flow 的代码， 所以这里又得 插播一条 关于flow 的相关 知识的介绍了。
+
+首先我们看看 vue 的作者 对于 选择 flow 而不是 typescript 的原因
+
+[vue 源码为什么选择 flow 来完成](https://www.zhihu.com/question/46397274)
 
 
 
