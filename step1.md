@@ -96,6 +96,17 @@ Vue.prototype._init = function (options?: Object) {
 
 [vue 源码为什么选择 flow 来完成](https://www.zhihu.com/question/46397274)
 
+好了，下面我们 看看 new Vue 的过程主要涉及到的三个对象
+
+  1. vm 
+  2. compiler
+  3. watcher
+
+其中 vm 表示 vue 的具体对象
+
+compiler 负责将template 解析为 AST render 方法。
+
+watcher 用于观察数据变化， 以实现 数据变化后的 re-render
 
 
 
