@@ -5,7 +5,7 @@ import { initState } from './state'
 import { initRender } from './render'
 import { initEvents } from './events'
 import { initLifecycle, callHook } from './lifecycle'
-import { mergeOptions } from '../util/index'
+import { mergeOptions } from '../util/index'  // 在 util 下的 options.js 文件下。用于合并对象
 
 let uid = 0       //  结合下面的 这个 vm._uid = uid ++  初步推测为 一个 单例模式，避免二次 实例化
 
@@ -21,7 +21,7 @@ export function initMixin (Vue: Class<Component>) {
       // optimize internal component instantiation   优化内部组件实例化
       // since dynamic options merging is pretty slow, and none of the
       // internal component options needs special treatment.
-      initInternalComponent(vm, options)
+      initInternalComponent(vm, options)    // 开始实例化化内部组件
     } else {
       vm.$options = mergeOptions(
         resolveConstructorOptions(vm.constructor),

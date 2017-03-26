@@ -41,7 +41,7 @@ if (process.env.NODE_ENV !== 'production') {
 function mergeData (to: Object, from: ?Object): Object {
   if (!from) return to
   let key, toVal, fromVal
-  const keys = Object.keys(from)
+  const keys = Object.keys(from)     // Object.keys 传入对象返回属性名称
   for (let i = 0; i < keys.length; i++) {
     key = keys[i]
     toVal = to[key]
