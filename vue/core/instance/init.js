@@ -7,18 +7,18 @@ import { initEvents } from './events'
 import { initLifecycle, callHook } from './lifecycle'
 import { mergeOptions } from '../util/index'
 
-let uid = 0
+let uid = 0       //  结合下面的 这个 vm._uid = uid ++  初步推测为 一个 单例模式，避免二次 实例化
 
 export function initMixin (Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
     // a uid
     vm._uid = uid++
-    // a flag to avoid this being observed
+    // a flag to avoid this being observed    说是为了避免被观察到。why ？ 接着看吧
     vm._isVue = true
     // merge options
     if (options && options._isComponent) {
-      // optimize internal component instantiation
+      // optimize internal component instantiation   优化内部组件实例化
       // since dynamic options merging is pretty slow, and none of the
       // internal component options needs special treatment.
       initInternalComponent(vm, options)
