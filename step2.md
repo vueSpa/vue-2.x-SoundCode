@@ -8,7 +8,7 @@
 
 ##### create new Vue 时， 会先进行 create 创造出 Vue 对象
 
-##### mounte 根据 ek template render 方法属性，会生成 DOM，并添加到对应 位置
+##### mounte 根据 el template render 方法属性，会生成 DOM，并添加到对应 位置
 
 ##### update 当数据发生变化的时候，会重新渲染 dom ,并进行替换
 
